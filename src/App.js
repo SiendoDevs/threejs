@@ -19,6 +19,19 @@ import { Car } from "./Car";
 import { Ground } from "./Ground";
 import { FloatingGrid } from "./FloatingGrid";
 import { Rings } from "./Rings";
+import Navbar from "./Navbar";
+import { Html } from "@react-three/drei";
+
+function InfoRectangle({ position, title, description }) {
+  return (
+    <Html position={position} center>
+      <div className="info-rectangle">
+        <h2>{title}</h2>
+        <p>{description}</p>
+      </div>
+    </Html>
+  );
+}
 
 function CarShow() {
   return (
@@ -80,6 +93,12 @@ function CarShow() {
           offset={[0.0005, 0.0012]} // color offset
         />
       </EffectComposer>
+
+      {/* Agregar tres rectángulos con información */}
+      <InfoRectangle position={[-4, 2, 0]} title="Feature 1" description="Descripción del rectángulo 1" />
+      <InfoRectangle position={[0, 2, 0]} title="Feature 2" description="Descripción del rectángulo 2" />
+      <InfoRectangle position={[4, 2, 0]} title="Feature 3" description="Descripción del rectángulo 3" />
+
     </>
   );
 }
@@ -87,9 +106,18 @@ function CarShow() {
 function App() {
   return (
     <Suspense fallback={null}>
-      <Canvas shadows>
-        <CarShow />
-      </Canvas>
+      <div>
+          <Navbar />
+        <Canvas shadows>
+          <CarShow />
+          <Html>
+            <div style={{ position: "absolute", top: 10, left: 10, color: "white" }}>
+              <h1>Contenido HTML Superpuesto</h1>
+              <p>¡Puedes agregar cualquier cosa aquí!</p>
+            </div>
+          </Html>
+        </Canvas>
+      </div>
     </Suspense>
   );
 }
