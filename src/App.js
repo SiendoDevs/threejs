@@ -2,7 +2,6 @@ import React, { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import {
   EffectComposer,
-  DepthOfField,
   Bloom,
   ChromaticAberration,
 } from "@react-three/postprocessing";
@@ -13,6 +12,8 @@ import {
   OrbitControls,
   PerspectiveCamera,
 } from "@react-three/drei";
+import { Html } from "@react-three/drei";
+
 import "./style.css";
 import { Boxes } from "./Boxes";
 import { Car } from "./Car";
@@ -20,11 +21,11 @@ import { Ground } from "./Ground";
 import { FloatingGrid } from "./FloatingGrid";
 import { Rings } from "./Rings";
 import Navbar from "./Navbar";
-import { Html } from "@react-three/drei";
+import YouTube from "react-youtube";
 
 function InfoRectangle({ position, title, description }) {
   return (
-    <Html position={position} center>
+    <Html position={position}>
       <div className="info-rectangle">
         <h2>{title}</h2>
         <p>{description}</p>
@@ -36,10 +37,7 @@ function InfoRectangle({ position, title, description }) {
 function CarShow() {
   return (
     <>
-      <OrbitControls 
-        target={[0, 0.35, 0]}
-        maxPolarAngle={1.45}
-      />
+      <OrbitControls target={[0, 0.35, 0]} maxPolarAngle={1.45} />
 
       <PerspectiveCamera makeDefault fov={50} position={[3, 2, 5]} />
 
@@ -78,27 +76,37 @@ function CarShow() {
       <Rings />
 
       <EffectComposer>
-        {/* <DepthOfField focusDistance={0.0035} focalLength={0.01} bokehScale={3} height={480} /> */}
         <Bloom
           blendFunction={BlendFunction.ADD}
-          intensity={1.3} // The bloom intensity.
-          width={300} // render width
-          height={300} // render height
-          kernelSize={5} // blur kernel size
-          luminanceThreshold={0.15} // luminance threshold. Raise this value to mask out darker elements in the scene.
-          luminanceSmoothing={0.025} // smoothness of the luminance threshold. Range is [0, 1]
+          intensity={1.3}
+          width={300}
+          height={300}
+          kernelSize={5}
+          luminanceThreshold={0.15}
+          luminanceSmoothing={0.025}
         />
         <ChromaticAberration
-          blendFunction={BlendFunction.NORMAL} // blend mode
-          offset={[0.0005, 0.0012]} // color offset
+          blendFunction={BlendFunction.NORMAL}
+          offset={[0.0005, 0.0012]}
         />
       </EffectComposer>
 
       {/* Agregar tres rectángulos con información */}
-      <InfoRectangle position={[-4, 2, 0]} title="Feature 1" description="Descripción del rectángulo 1" />
-      <InfoRectangle position={[0, 2, 0]} title="Feature 2" description="Descripción del rectángulo 2" />
-      <InfoRectangle position={[4, 2, 0]} title="Feature 3" description="Descripción del rectángulo 3" />
-
+      <InfoRectangle
+        position={[-4, 2, 0]}
+        title="Feature 1"
+        description="Descripción del rectángulo 1"
+      />
+      <InfoRectangle
+        position={[0, 2, 0]}
+        title="Feature 2"
+        description="Descripción del rectángulo 2"
+      />
+      <InfoRectangle
+        position={[4, 2, 0]}
+        title="Feature 3"
+        description="Descripción del rectángulo 3"
+      />
     </>
   );
 }
@@ -107,16 +115,22 @@ function App() {
   return (
     <Suspense fallback={null}>
       <div>
-          <Navbar />
+        <Navbar />
         <Canvas shadows>
           <CarShow />
-          <Html>
-            <div style={{ position: "absolute", top: 10, left: 10, color: "white" }}>
-              <h1>Contenido HTML Superpuesto</h1>
-              <p>¡Puedes agregar cualquier cosa aquí!</p>
-            </div>
-          </Html>
         </Canvas>
+
+         {/* Music Player */}
+         <YouTube
+          videoId="HBUfqPBD7Uo"
+          opts={{
+            width: "0",
+            height: "0",
+            playerVars: {
+              autoplay: 1,
+            },
+          }}
+        />
       </div>
     </Suspense>
   );
