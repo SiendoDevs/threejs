@@ -1,0 +1,10 @@
+# Dependency directories
+node_modules/
+
+# Optional: Logs and runtime data
+logs/
+*.log
+
+# Ignorar completamente la carpeta .cache
+.cache/
+
