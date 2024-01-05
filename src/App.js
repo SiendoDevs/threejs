@@ -1,17 +1,12 @@
-import React, { Suspense } from "react";
-import { Canvas } from "@react-three/fiber";
+import React, { Suspense, useRef } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
 import {
   EffectComposer,
   Bloom,
   ChromaticAberration,
 } from "@react-three/postprocessing";
 import { BlendFunction } from "postprocessing";
-import {
-  CubeCamera,
-  Environment,
-  OrbitControls,
-  PerspectiveCamera,
-} from "@react-three/drei";
+import { CubeCamera, Environment, OrbitControls, PerspectiveCamera } from "@react-three/drei";
 import { Html } from "@react-three/drei";
 
 import "./style.css";
@@ -21,7 +16,7 @@ import { Ground } from "./Ground";
 import { FloatingGrid } from "./FloatingGrid";
 import { Rings } from "./Rings";
 import Navbar from "./Navbar";
-import YouTube from "react-youtube";
+
 
 function InfoRectangle({ position, title, description }) {
   return (
@@ -119,18 +114,6 @@ function App() {
         <Canvas shadows>
           <CarShow />
         </Canvas>
-
-         {/* Music Player */}
-         {/* <YouTube
-          videoId="HBUfqPBD7Uo"
-          opts={{
-            width: "0",
-            height: "0",
-            playerVars: {
-              autoplay: 1,
-            },
-          }}
-        /> */}
       </div>
     </Suspense>
   );
