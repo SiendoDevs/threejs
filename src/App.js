@@ -78,7 +78,7 @@ function CarShow() {
       <EffectComposer>
         <Bloom
           blendFunction={BlendFunction.ADD}
-          intensity={1.3}
+          intensity={1}
           width={300}
           height={300}
           kernelSize={5}

@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { useFrame } from "@react-three/fiber";
 import { Vector3 } from "three";
-import { Bloom } from "@react-three/postprocessing"; // Importa el componente Bloom
+import { Bloom } from "@react-three/postprocessing";
 
 function Box({ color }) {
   const box = useRef();
@@ -49,22 +49,13 @@ function Box({ color }) {
       box.current.rotation.x += delta * xRotSpeed;
       box.current.rotation.y += delta * yRotSpeed;
     },
-    [xRotSpeed, yRotSpeed, position]
+    [box, time, position, xRotSpeed, yRotSpeed] // Asegúrate de incluir todas las dependencias aquí
   );
 
   return (
     <mesh ref={box} rotation-x={Math.PI * 0.5} scale={scale} castShadow>
       <boxGeometry args={[1, 1, 1]} />
       <meshStandardMaterial color={color} envMapIntensity={0.15} />
-      {/* Agrega el componente Bloom al mesh */}
-      <Bloom
-        luminanceThreshold={0}
-        luminanceSmoothing={0.9}
-        intensity={1.5}
-        radius={0.2}
-        height={300}
-        width={300}
-      />
     </mesh>
   );
 }
@@ -76,11 +67,5 @@ export function Boxes() {
     return a;
   });
 
-  return (
-    <>
-      {arr.map((e, i) => (
-        <Box key={i} color={i % 2 === 0 ? [0.4, 0.1, 0.1] : [0.05, 0.15, 0.4]} />
-      ))}
-    </>
-  );
+  return <>{arr.map((e, i) => <Box key={i} color={i % 2 === 0 ? [0.4, 0.1, 0.1] : [0.05, 0.15, 0.4]} />)}</>;
 }
