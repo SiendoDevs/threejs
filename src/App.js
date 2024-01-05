@@ -121,7 +121,7 @@ function App() {
         </Canvas>
 
          {/* Music Player */}
-         <YouTube
+         {/* <YouTube
           videoId="HBUfqPBD7Uo"
           opts={{
             width: "0",
@@ -130,7 +130,7 @@ function App() {
               autoplay: 1,
             },
           }}
-        />
+        /> */}
       </div>
     </Suspense>
   );
