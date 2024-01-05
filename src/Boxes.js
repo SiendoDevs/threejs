@@ -1,7 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useFrame } from "@react-three/fiber";
 import { Vector3 } from "three";
-import { Bloom } from "@react-three/postprocessing";
 
 function Box({ color }) {
   const box = useRef();
